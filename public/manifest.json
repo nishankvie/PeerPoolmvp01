@@ -1,0 +1,41 @@
+{
+  "name": "PeerPool",
+  "short_name": "PeerPool",
+  "description": "Find study partners, game teammates, or companions for events",
+  "start_url": "/",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#0D0D12",
+  "theme_color": "#1a365d",
+  "categories": ["social", "education", "lifestyle"],
+  "icons": [
+    {
+      "src": "/logo.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/logo.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "maskable"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "Create Hangout",
+      "short_name": "Create",
+      "description": "Create a new hangout",
+      "url": "/hangout",
+      "icons": [{ "src": "/logo.png", "sizes": "192x192" }]
+    },
+    {
+      "name": "Career Hub",
+      "short_name": "Career",
+      "description": "Find hackathons and study buddies",
+      "url": "/career",
+      "icons": [{ "src": "/logo.png", "sizes": "192x192" }]
+    }
+  ]
+}

@@ -1,0 +1,256 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Base styles */
+@layer base {
+  * {
+    box-sizing: border-box;
+    -webkit-tap-highlight-color: transparent;
+  }
+  
+  html {
+    font-size: 16px;
+    scroll-behavior: smooth;
+    overscroll-behavior: none;
+  }
+  
+  body {
+    @apply font-sans text-white antialiased;
+    background-color: #0D0D12;
+    min-height: 100vh;
+    min-height: 100dvh;
+    background: linear-gradient(180deg, #0D0D12 0%, #12121A 50%, #0D0D12 100%);
+    overscroll-behavior-y: contain;
+  }
+  
+  :root {
+    --safe-area-inset-top: env(safe-area-inset-top, 0px);
+    --safe-area-inset-right: env(safe-area-inset-right, 0px);
+    --safe-area-inset-bottom: env(safe-area-inset-bottom, 0px);
+    --safe-area-inset-left: env(safe-area-inset-left, 0px);
+  }
+  
+  #root {
+    min-height: 100vh;
+    min-height: 100dvh;
+    display: flex;
+    flex-direction: column;
+  }
+  
+  ::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+  }
+  
+  ::-webkit-scrollbar-track {
+    background: transparent;
+  }
+  
+  ::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 3px;
+  }
+  
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-display font-semibold tracking-tight;
+  }
+}
+
+@layer components {
+  .container-app {
+    @apply w-full max-w-[1440px] mx-auto px-4 sm:px-6;
+  }
+  
+  /* Safe area utilities */
+  .safe-top { padding-top: var(--safe-area-inset-top); }
+  .safe-bottom { padding-bottom: var(--safe-area-inset-bottom); }
+  .pb-safe { padding-bottom: max(16px, var(--safe-area-inset-bottom)); }
+  .pb-safe-nav { padding-bottom: calc(80px + var(--safe-area-inset-bottom)); }
+  
+  /* Page wrapper with bottom nav padding */
+  .page-wrapper {
+    padding-bottom: calc(env(safe-area-inset-bottom, 0px) + 96px);
+  }
+  
+  /* Glass morphism */
+  .glass {
+    @apply bg-white/5 backdrop-blur-xl border border-white/10 rounded-xl;
+  }
+  
+  .glass-heavy {
+    @apply bg-white/10 backdrop-blur-2xl border border-white/20 rounded-xl;
+  }
+  
+  /* Buttons */
+  .btn {
+    @apply inline-flex items-center justify-center gap-2 
+           px-4 py-2.5 sm:px-6 sm:py-3
+           text-sm sm:text-base
+           font-semibold rounded-xl transition-all duration-300
+           disabled:opacity-50 disabled:cursor-not-allowed
+           active:scale-95;
+  }
+  
+  .btn-party { @apply btn bg-gradient-party text-white shadow-neon-party hover:brightness-110; }
+  .btn-chill { @apply btn bg-gradient-chill text-dark shadow-neon-chill hover:brightness-110; }
+  .btn-play { @apply btn bg-gradient-play text-dark shadow-neon-play hover:brightness-110; }
+  .btn-focus { @apply btn bg-gradient-focus text-white shadow-neon-focus hover:brightness-110; }
+  .btn-social { @apply btn bg-gradient-social text-white shadow-neon-social hover:brightness-110; }
+  .btn-glass { @apply btn glass text-white hover:bg-white/15; }
+  
+  /* Badges */
+  .badge-party { @apply bg-party/20 text-party border border-party/30; }
+  .badge-chill { @apply bg-chill/20 text-chill border border-chill/30; }
+  .badge-play { @apply bg-play/20 text-play border border-play/30; }
+  .badge-focus { @apply bg-focus/20 text-focus border border-focus/30; }
+  .badge-social { @apply bg-social/20 text-social border border-social/30; }
+  
+  /* Input */
+  .input {
+    @apply w-full px-3 py-2.5 sm:px-4 sm:py-3 rounded-xl bg-white/5 border border-white/10 
+           text-white text-base placeholder:text-white/40
+           focus:border-white/30 focus:bg-white/10 focus:outline-none
+           transition-all duration-200;
+    font-size: 16px; /* Prevents zoom on iOS */
+  }
+  
+  /* Modal max-height for mobile */
+  .modal-content {
+    max-height: calc(100vh - 120px);
+    max-height: calc(100dvh - 120px);
+    overflow-y: auto;
+    padding-bottom: calc(env(safe-area-inset-bottom, 0px) + 96px);
+  }
+  
+  /* Sticky submit button */
+  .sticky-submit {
+    position: sticky;
+    bottom: env(safe-area-inset-bottom, 0px);
+    background: inherit;
+    padding-bottom: max(16px, env(safe-area-inset-bottom, 0px));
+  }
+}
+
+@layer utilities {
+  .scrollbar-hide {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+  .scrollbar-hide::-webkit-scrollbar { display: none; }
+  
+  .h-screen-safe {
+    height: 100vh;
+    height: 100dvh;
+  }
+  
+  .min-h-screen-safe {
+    min-height: 100vh;
+    min-height: 100dvh;
+  }
+  
+  .touch-target {
+    min-height: 44px;
+    min-width: 44px;
+  }
+  
+  /* Focus scroll utility */
+  .focus-scroll:focus {
+    scroll-margin-bottom: 120px;
+  }
+  
+  /* Line clamp utilities */
+  .line-clamp-1 {
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 1;
+  }
+  
+  .line-clamp-2 {
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+  }
+  
+  /* Animation utilities */
+  .animate-fade-in {
+    animation: fadeIn 0.3s ease-out;
+  }
+  
+  .animate-slide-up {
+    animation: slideUp 0.3s ease-out;
+  }
+}
+
+/* Keyframes */
+@keyframes fadeIn {
+  0% { opacity: 0; }
+  100% { opacity: 1; }
+}
+
+@keyframes slideUp {
+  0% { opacity: 0; transform: translateY(20px); }
+  100% { opacity: 1; transform: translateY(0); }
+}
+
+/* iOS keyboard handling */
+@supports (padding-bottom: env(safe-area-inset-bottom)) {
+  .input:focus {
+    scroll-margin-bottom: 120px;
+  }
+}
+
+/* PWA Standalone Mode */
+@media all and (display-mode: standalone) {
+  /* Adjust for PWA status bar */
+  .safe-top {
+    padding-top: max(env(safe-area-inset-top, 0px), 20px);
+  }
+  
+  /* Prevent text selection in app mode */
+  body {
+    -webkit-user-select: none;
+    user-select: none;
+  }
+  
+  /* Allow text selection in inputs */
+  input, textarea {
+    -webkit-user-select: text;
+    user-select: text;
+  }
+  
+  /* Hide scrollbars in standalone mode */
+  ::-webkit-scrollbar {
+    display: none;
+  }
+  
+  * {
+    scrollbar-width: none;
+  }
+}
+
+/* iOS PWA specific fixes */
+@supports (-webkit-touch-callout: none) {
+  /* Fix for iOS notch */
+  .safe-top {
+    padding-top: env(safe-area-inset-top, 0px);
+  }
+  
+  /* Prevent iOS bounce */
+  html, body {
+    position: fixed;
+    overflow: hidden;
+    width: 100%;
+    height: 100%;
+  }
+  
+  #root {
+    position: fixed;
+    overflow: auto;
+    -webkit-overflow-scrolling: touch;
+    width: 100%;
+    height: 100%;
+  }
+}
